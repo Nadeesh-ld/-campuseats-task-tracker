@@ -71,8 +71,10 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(
-        builder.Configuration.GetConnectionString("Default")
-            ?? throw new InvalidOperationException("ConnectionStrings:Default must be configured.")
+        PostgresConnectionString.Normalize(
+            builder.Configuration.GetConnectionString("Default")
+                ?? throw new InvalidOperationException("ConnectionStrings:Default must be configured.")
+        )
     ));
 
 

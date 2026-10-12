@@ -12,7 +12,7 @@ public sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbConte
                 "Set ConnectionStrings__Default before running EF Core commands.");
 
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseNpgsql(connectionString)
+            .UseNpgsql(PostgresConnectionString.Normalize(connectionString))
             .Options;
 
         return new AppDbContext(options);
