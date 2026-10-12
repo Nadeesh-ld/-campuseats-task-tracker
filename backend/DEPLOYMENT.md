@@ -20,7 +20,7 @@ Keep production credentials in the backend host's environment settings. Do not a
 
 In Render, create a Docker Web Service with `backend` as the root directory. Add the variables above under **Environment**, save, and deploy. Keep the connection string and JWT key private. For local development, copy `.env.example` to `.env`, fill in your local values, and run `./run-local.ps1` from PowerShell. The script loads `.env` into the API process; ASP.NET Core does not read `.env` files by itself. The real `.env` file is ignored by Git.
 
-**Npgsql expects the keyword format shown above.** Do not paste Neon’s `postgresql://...` URL directly into `ConnectionStrings__Default`; translate its host, database, username, password, and SSL options to the Npgsql format. The `.env` template uses this format already.
+**Npgsql expects the keyword format shown above.** Do not paste a provider's `postgresql://...` URL directly into `ConnectionStrings__Default`; translate its host, database, username, password, and SSL options to the Npgsql format. For an external Render Postgres URL, include `SSL Mode=Require`. For a Render service and database in the same region, prefer the database's internal URL; Render's internal network does not require SSL. The `.env` template uses keyword format.
 
 ## Apply the database migration
 
